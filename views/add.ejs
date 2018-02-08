@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ./partials/header %>
+
+    <body>
+        <nav class="nav">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                <a class="nav-link" href="/">List</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="/add">New Contact</a>
+                </li>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <h2 class="display-5">Add A New Contact</h2>
+
+                <form name="addform" action="/add" method="post" onsubmit="return validateAddForm()">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                        <div class="col-sm-10">
+                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Digits only. No ( ) -">
+                        </div>
+                    </div>
+                    <fieldset class="form-group">
+                        <div class="row">
+                        <legend class="col-form-legend col-sm-2">Phone Type</legend>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="phonetype" id="typecell" value="cell" checked>
+                                Cell
+                            </label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="phonetype" id="typeland" value="landline">
+                                Landline
+                            </label>
+                            </div>
+                        </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group row">
+                        <div class="col-sm-2">Skills</div>
+                        <div class="col-sm-10">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="skill_java" value="java"> java
+                            </label>
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="skill_cpp" value="cpp"> cpp
+                            </label>
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="skill_csharp" value="csharp"> csharp
+                            </label>
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="skill_nodejs" value="nodejs"> nodejs
+                            </label>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        </div>
+
+    <% include ./partials/footer %>
+    <% include ./partials/scripts %>
+    </body>
+    <script>
+        function validateAddForm() {
+            const name = document.forms["addform"]["name"].value;
+            if (name == "") {
+                alert("Name cannot be empty");
+                return false;
+            }
+            const phone = document.forms["addform"]["phone"].value;
+            if (phone == "") {
+                alert("phone cannot be empty");
+                return false;
+            }
+            for (const char of phone) {
+                if (!('0' <= char && char <= '9')) {
+                    alert("Phone number must have digits only");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</html>

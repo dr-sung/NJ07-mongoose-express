@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ./partials/header %>
+
+    <body>
+        <nav class="nav">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                <a class="nav-link active" href="/">List</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/add">New Contact</a>
+                </li>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <h2 class="display-5">My Contacts</h2>
+
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone (type)</th>
+                        <th scope="col">Skills</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% for (const contact of results) { %>
+                        <tr>
+                            <td><%= contact.name %></td>
+                            <td><%= contact.phone %>
+                                (<%= contact.isCell ? "Cell" : "Landline" %>) </td>
+                            <td>[<%= Contact.getSkillsList(contact.skills) %>]</td>
+                            <td>
+                                <form action="/update" method="get">
+                                    <input type="hidden" name="contactinfo" value='<%= JSON.stringify(contact) %>' >
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/remove" method="get">
+                                    <input type="hidden" name="_id" value="<%= contact._id %>">
+                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+
+    <% include ./partials/footer %>
+    <% include ./partials/scripts %>
+    </body>
+
+</html>
