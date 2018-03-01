@@ -12,7 +12,7 @@ mongoose.connect(url, options);
 // close connection when app terminates
 process.on('SIGINT', () => {
     mongoose.connection.close( () => {
-        console.log('Mongoose connection closed dut to app termination');
+        console.log('Mongoose connection closed due to app termination');
         process.exit(0);
     })
 });
