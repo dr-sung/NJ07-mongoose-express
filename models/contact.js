@@ -20,4 +20,6 @@ contactSchema.statics.getSkillsList = function(skills) {
     return list;
 }
 
+// a collection named 'contacts' is created
+// 'contacts' collection uses contactSchema to store documents (data)
 module.exports = mongoose.model('Contacts', contactSchema);
